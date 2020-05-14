@@ -23,6 +23,9 @@ int main()
   *(int *)&element = 3;
   insert_at(list, element, 1);
   display_int(list);
-
+  element = remove_from_start(list);
+  printf("Element removed : %d\n", *(int *)&element);
+  element = remove_from_end(list);
+  printf("Element removed : %d\n", *(int *)&element);
   return 0;
 }
