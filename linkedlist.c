@@ -81,3 +81,18 @@ Status insert_at(List_ptr list, Element element, int position)
   ++list->length;
   return Success;
 }
+
+Element remove_from_start(List_ptr list)
+{
+  Element removed_element = NULL;
+  if (!list->first)
+  {
+    return removed_element;
+  }
+  Node_ptr p_walk = list->first;
+  list->first = p_walk->next;
+  list->length = list->length - 1;
+  removed_element = p_walk->element;
+  free(p_walk);
+  return removed_element;
+}
