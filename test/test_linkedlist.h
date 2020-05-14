@@ -12,5 +12,7 @@ void test_add_to_start();
 void test_insert_at();
 void test_remove_at();
 void test_remove_from_end();
+void test_remove_from_start();
+
 Status assert_values(Element num1, Element num2, Types type);
 Status assert_lists(List_ptr actual, List_ptr expected, Types type);

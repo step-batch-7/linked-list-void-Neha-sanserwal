@@ -233,3 +233,42 @@ void test_remove_from_end()
   assert_display_msg("remove from last position of long list", list, expected, INT);
   clear_list(expected);
 }
+
+void test_remove_from_start()
+{
+  List_ptr list = create_list();
+  int values1[] = {};
+  Element e;
+  *(int *)&e = 1;
+  add_to_list(list, e);
+  Element *void_values = malloc(sizeof(Element) * 5);
+  create_array_int(values1, 0, void_values);
+  List_ptr expected = set_expectation(void_values, 0);
+  remove_from_start(list);
+  assert_display_msg("remove from start of single element list", list, expected, INT);
+  clear_list(expected);
+  int values2[] = {2};
+  create_array_int(values2, 1, void_values);
+  expected = set_expectation(void_values, 1);
+  *(int *)&e = 1;
+  add_to_list(list, e);
+  *(int *)&e = 2;
+  add_to_list(list, e);
+  remove_from_start(list);
+  assert_display_msg("remove from first position of list more than one element", list, expected, INT);
+  clear_list(expected);
+  int values3[] = {2, 3, 4, 5};
+  create_array_int(values3, 4, void_values);
+  expected = set_expectation(void_values, 4);
+  *(int *)&e = 2;
+  add_to_list(list, e);
+  *(int *)&e = 3;
+  add_to_list(list, e);
+  *(int *)&e = 4;
+  add_to_list(list, e);
+  *(int *)&e = 5;
+  add_to_list(list, e);
+  remove_from_start(list);
+  assert_display_msg("remove from first position of long list", list, expected, INT);
+  clear_list(expected);
+}

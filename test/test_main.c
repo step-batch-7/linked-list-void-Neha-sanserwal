@@ -13,5 +13,7 @@ int main()
   test_remove_at();
   printf("remove_from_end : \n");
   test_remove_from_end();
+  printf("remove_from_start : \n");
+  test_remove_from_start();
   return 0;
 }
