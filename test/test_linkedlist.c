@@ -8,7 +8,6 @@ Element *create_array_int(int *values, int length)
     int e = values[i];
     numbers[i] = &e;
   }
-  printf("%d dsdjs", *(int *)numbers[0]);
   return *numbers;
 }
 

@@ -44,6 +44,8 @@ typedef Status (*Matcher)(Element, Element);
 List_ptr create_list();
 Node_ptr create_node(Element);
 
+Node_ptr walk_to(Node_ptr p_walk, int from, int position);
+List_ptr assign_first_and_last(List_ptr list, Node_ptr ptr);
 Status add_to_list(List_ptr, Element);
 Status add_to_start(List_ptr, Element);
 Status insert_at(List_ptr, Element element, int position);
