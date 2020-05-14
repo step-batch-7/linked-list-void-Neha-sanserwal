@@ -10,6 +10,13 @@ Node_ptr walk_to(Node_ptr p_walk, int from, int position)
   return p_walk;
 }
 
+List_ptr assign_first_and_last(List_ptr list, Node_ptr ptr)
+{
+  list->first = ptr;
+  list->last = ptr;
+  return list;
+}
+
 List_ptr create_list()
 {
   List_ptr list = malloc(sizeof(LinkedList));
@@ -95,4 +102,25 @@ Element remove_from_start(List_ptr list)
   removed_element = p_walk->element;
   free(p_walk);
   return removed_element;
+}
+Element remove_from_end(List_ptr list)
+{
+  Node_ptr p_walk = list->first;
+  if (!p_walk)
+  {
+    return Failure;
+  }
+  if (list->length == 1)
+  {
+    free(p_walk);
+    list = assign_first_and_last(list, NULL);
+    list->length = list->length - 1;
+    return Success;
+  }
+  p_walk = walk_to(p_walk, 2, list->length);
+  list->last = p_walk;
+  p_walk->next = NULL;
+  free(p_walk->next);
+  list->length = list->length - 1;
+  return Success;
 }
