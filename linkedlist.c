@@ -168,3 +168,37 @@ Status clear_list(List_ptr list)
   }
   return Failure;
 }
+
+Status matcher_int(Element elementA, Element elementB)
+{
+  return *(int *)&elementA == *(int *)&elementB;
+}
+
+Element does_exist(Element value, List_ptr list, Matcher matcher)
+{
+  Element position;
+  int count = -1;
+  Node_ptr p_walk = list->first;
+  for (int i = 0; i < list->length; i++)
+  {
+    if (matcher(p_walk->element, value))
+    {
+      position = &i;
+      return position;
+    }
+    p_walk = p_walk->next;
+  }
+  position = &count;
+  return position;
+}
+Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
+{
+
+  Element position = does_exist(value, list, matcher);
+  if (*(int *)&position == -1)
+  {
+
+    return position;
+  }
+  return remove_at(list, *(int *)&position);
+}

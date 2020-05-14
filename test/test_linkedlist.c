@@ -272,3 +272,7 @@ void test_remove_from_start()
   assert_display_msg("remove from first position of long list", list, expected, INT);
   clear_list(expected);
 }
+
+void test_remove_first_occurrence()
+{
+}
