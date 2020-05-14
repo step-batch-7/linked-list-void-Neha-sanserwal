@@ -127,3 +127,24 @@ void test_add_to_start()
   assert_display_msg("adding number at start of existing list with numbers ", list, expected, INT);
   clear_list(expected);
 }
+
+void test_insert_at()
+{
+  List_ptr list = create_list();
+  int values1[] = {1, 2, 3};
+  Element e;
+  *(int *)&e = 1;
+  Element *void_values;
+  create_array_int(values1, 3, void_values);
+  List_ptr expected = set_expectation(void_values, 1);
+  insert_at(list, e, 0);
+  assert_display_msg("insert at 0th position of empty list", list, expected, INT);
+  clear_list(expected);
+  int values2[] = {1, 2};
+  create_array_int(values2, 2, void_values);
+  expected = set_expectation(void_values, 2);
+  *(int *)&e = 2;
+  insert_at(list, e, 1);
+  assert_display_msg("insert at last position of list", list, expected, INT);
+  clear_list(expected);
+}

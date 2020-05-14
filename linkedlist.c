@@ -39,8 +39,7 @@ Status add_to_list(List_ptr list, Element element)
   Node_ptr node = create_node(element);
   if (list->first == NULL)
   {
-    list->first = node;
-    list->last = node;
+    assign_first_and_last(list, node);
     ++list->length;
     return Success;
   }
