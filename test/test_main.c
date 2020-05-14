@@ -9,7 +9,9 @@ int main()
   test_add_to_start();
   printf("insert_at : \n");
   test_insert_at();
-  printf("insert_at : \n");
+  printf("remove_at : \n");
   test_remove_at();
+  printf("remove_from_end : \n");
+  test_remove_from_end();
   return 0;
 }
