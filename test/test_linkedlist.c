@@ -1,31 +1,40 @@
 #include "../linkedlist.c"
 #include "test_linkedlist.h"
+Element *create_array_int(int *values, int length)
+{
+  Element *numbers = malloc(sizeof(Element) * length);
+  for (int i = 0; i < length; i++)
+  {
+    int e = values[i];
+    numbers[i] = &e;
+  }
+  printf("%d dsdjs", *(int *)numbers[0]);
+  return *numbers;
+}
 
-List_ptr set_expectation_int(int *values, int length)
+List_ptr set_expectation(Element *values, int length)
 {
   List_ptr expected = create_list();
   expected->length = 0;
-  Element e;
   if (length > 0)
   {
-    e = &values[0];
-    expected->first = create_node(e);
+
+    expected->first = create_node(values[0]);
     expected->last = expected->first;
     expected->length = expected->length + 1;
   }
   for (int i = 1; i < length; i++)
   {
-    e = &values[i];
-    Node_ptr node = create_node(e);
+    Node_ptr node = create_node(values[i]);
     expected->last->next = node;
     expected->last = node;
     ++expected->length;
   }
   return expected;
 }
+
 void assert_display_msg(char *msg, List_ptr actual, List_ptr expected, Types type)
 {
-
   if (assert_lists(actual, expected, type))
   {
 
@@ -67,11 +76,12 @@ Status assert_lists(List_ptr actual, List_ptr expected, Types type)
   }
   Node_ptr p_walkA = actual->first;
   Node_ptr p_walkB = expected->first;
+
   while (p_walkB != NULL)
   {
+    // printf("%d%d", *(int *)&p_walkA->element, *(int *)&p_walkB->element);
     if (!assert_values(p_walkA->element, p_walkB->element, type))
     {
-
       return Failure;
     }
     p_walkB = p_walkB->next;
@@ -84,20 +94,19 @@ void test_add_to_list()
 {
 
   List_ptr list = create_list();
-  List_ptr expected = create_list();
-  int value = 1;
-  Element e = &value;
-  Node_ptr node = create_node(e);
-  expected->first = node;
-  expected->last = node;
-  expected->length = 1;
+  int values1[] = {1};
+  Element e;
+  *(int *)&e = 1;
+  Element *void_values = (void *)(create_array_int(values1, 1));
+  List_ptr expected = set_expectation(void_values, 1);
   add_to_list(list, e);
   assert_display_msg("adding the first node to list", list, expected, INT);
-
-  value = 2;
-  node = create_node(e);
-  expected->length = 2;
+  int values2[] = {1, 2};
+  *(int *)&e = 2;
   add_to_list(list, e);
+  Element *void_values2 = create_array_int(values2, 2);
+  expected = set_expectation(void_values, 2);
+
   assert_display_msg("adding number at last of existing list with numbers ", list, expected, INT);
 }
 

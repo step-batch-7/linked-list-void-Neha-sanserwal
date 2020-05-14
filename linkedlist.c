@@ -105,22 +105,25 @@ Element remove_from_start(List_ptr list)
 }
 Element remove_from_end(List_ptr list)
 {
+  Element removed_element = malloc(sizeof(Element));
   Node_ptr p_walk = list->first;
   if (!p_walk)
   {
-    return Failure;
+    return removed_element;
   }
   if (list->length == 1)
   {
+    removed_element = p_walk->element;
     free(p_walk);
     list = assign_first_and_last(list, NULL);
     list->length = list->length - 1;
-    return Success;
+    return removed_element;
   }
   p_walk = walk_to(p_walk, 2, list->length);
   list->last = p_walk;
   p_walk->next = NULL;
+  removed_element = p_walk->next->element;
   free(p_walk->next);
   list->length = list->length - 1;
-  return Success;
+  return removed_element;
 }
