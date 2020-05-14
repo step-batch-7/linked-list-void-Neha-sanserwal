@@ -36,7 +36,7 @@ int main()
   printf("Element removed : %d\n", *(int *)&element);
   element = remove_at(list, 0);
   printf("Element removed : %d\n", *(int *)&element);
-
+  clear_list(list);
   list = create_list();
   *(float *)&element = 1.1;
   add_to_list(list, element);

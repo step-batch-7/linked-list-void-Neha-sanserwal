@@ -152,3 +152,20 @@ Element remove_at(List_ptr list, int position)
   --list->length;
   return removed_element;
 }
+
+Status clear_list(List_ptr list)
+{
+  while (list->length)
+  {
+    Node_ptr p_walk = list->first;
+    list->first = p_walk->next;
+    free(p_walk);
+    list->length = list->length - 1;
+  }
+  list = assign_first_and_last(list, NULL);
+  if (list->length == 0)
+  {
+    return Success;
+  }
+  return Failure;
+}
