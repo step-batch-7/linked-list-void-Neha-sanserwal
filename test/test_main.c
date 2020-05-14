@@ -6,20 +6,20 @@ typedef enum
   FLOAT,
   CHAR
 } Types;
+
 Status assert_values(Element num1, Element num2, Types type)
 {
   Status status;
   switch (type)
   {
   case INT:
-    printf("%d", (*(int *)num1 == *(int *)num2));
-    status = (*(int *)num1 == *(int *)num2);
+    status = (*(int *)&num1 == *(int *)&num2);
     break;
   case FLOAT:
-    status = (*(float *)num1 == *(float *)num2);
+    status = (*(float *)&num1 == *(float *)&num2);
     break;
   case CHAR:
-    status = (*(char *)num1 == *(char *)num2);
+    status = (*(char *)&num1 == *(char *)&num2);
     break;
   default:
     break;
@@ -38,7 +38,7 @@ Status assert_lists(List_ptr actual, List_ptr expected, Types type)
   }
   Node_ptr p_walkA = actual->first;
   Node_ptr p_walkB = expected->first;
-  while (!p_walkB)
+  while (p_walkB != NULL)
   {
     if (!assert_values(p_walkA->element, p_walkB->element, type))
     {
@@ -77,5 +77,11 @@ int main()
   expected->length = 1;
   add_to_list(list, e);
   assert_display_msg("adding the first node to list", list, expected, INT);
+
+  value = 2;
+  node = create_node(e);
+  expected->length = 2;
+  add_to_list(list, e);
+  assert_display_msg("adding number at last of existing list with numbers ", list, expected, INT);
   return 0;
 }

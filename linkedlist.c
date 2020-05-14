@@ -24,7 +24,12 @@ Status add_to_list(List_ptr list, Element element)
   {
     list->first = node;
     list->last = node;
+    ++list->length;
+    return Success;
   }
+
+  list->last->next = node;
+  list->last = node;
   ++list->length;
   return Success;
 }
