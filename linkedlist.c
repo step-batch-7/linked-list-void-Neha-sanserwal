@@ -127,3 +127,28 @@ Element remove_from_end(List_ptr list)
   list->length = list->length - 1;
   return removed_element;
 }
+
+Element remove_at(List_ptr list, int position)
+{
+  Node_ptr p_walk = list->first;
+  Element removed_element = NULL;
+  if (position > list->length - 1 || position < 0 || !p_walk)
+  {
+    return removed_element;
+  }
+  if (position == list->length - 1)
+  {
+    return remove_from_end(list);
+  }
+  if (position == 0)
+  {
+    return remove_from_start(list);
+  }
+  p_walk = walk_to(p_walk, 1, position);
+  Node_ptr temp = p_walk->next;
+  p_walk->next = temp->next;
+  removed_element = temp;
+  free(temp);
+  --list->length;
+  return removed_element;
+}

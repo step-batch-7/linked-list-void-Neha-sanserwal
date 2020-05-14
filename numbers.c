@@ -27,5 +27,8 @@ int main()
   printf("Element removed : %d\n", *(int *)&element);
   element = remove_from_end(list);
   printf("Element removed : %d\n", *(int *)&element);
+
+  element = remove_at(list, 0);
+  printf("Element removed : %d\n", *(int *)&element);
   return 0;
 }
