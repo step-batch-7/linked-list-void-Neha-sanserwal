@@ -92,7 +92,7 @@ void test_add_to_list()
   int values1[] = {1};
   Element e;
   *(int *)&e = 1;
-  Element *void_values;
+  Element *void_values = malloc(sizeof(Element) * 3);
   create_array_int(values1, 1, void_values);
   List_ptr expected = set_expectation(void_values, 1);
   add_to_list(list, e);
@@ -113,7 +113,7 @@ void test_add_to_start()
   int values1[] = {1};
   Element e;
   *(int *)&e = 1;
-  Element *void_values;
+  Element *void_values = malloc(sizeof(Element) * 3);
   create_array_int(values1, 1, void_values);
   List_ptr expected = set_expectation(void_values, 1);
   add_to_start(list, e);
@@ -127,14 +127,22 @@ void test_add_to_start()
   assert_display_msg("adding number at start of existing list with numbers ", list, expected, INT);
   clear_list(expected);
 }
-
+void display_int(List_ptr list)
+{
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    printf("%d\n", *(int *)&p_walk->element);
+    p_walk = p_walk->next;
+  }
+}
 void test_insert_at()
 {
   List_ptr list = create_list();
-  int values1[] = {1, 2, 3};
+  int values1[] = {1};
   Element e;
   *(int *)&e = 1;
-  Element *void_values;
+  Element *void_values = malloc(sizeof(Element) * 3);
   create_array_int(values1, 3, void_values);
   List_ptr expected = set_expectation(void_values, 1);
   insert_at(list, e, 0);
@@ -146,5 +154,12 @@ void test_insert_at()
   *(int *)&e = 2;
   insert_at(list, e, 1);
   assert_display_msg("insert at last position of list", list, expected, INT);
+  clear_list(expected);
+  int values3[] = {1, 3, 2};
+  create_array_int(values3, 3, void_values);
+  expected = set_expectation(void_values, 3);
+  *(int *)&e = 3;
+  insert_at(list, e, 1);
+  assert_display_msg("insert in middle position of list", list, expected, INT);
   clear_list(expected);
 }
