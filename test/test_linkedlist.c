@@ -127,15 +127,7 @@ void test_add_to_start()
   assert_display_msg("adding number at start of existing list with numbers ", list, expected, INT);
   clear_list(expected);
 }
-void display_int(List_ptr list)
-{
-  Node_ptr p_walk = list->first;
-  while (p_walk != NULL)
-  {
-    printf("%d\n", *(int *)&p_walk->element);
-    p_walk = p_walk->next;
-  }
-}
+
 void test_insert_at()
 {
   List_ptr list = create_list();
@@ -143,7 +135,7 @@ void test_insert_at()
   Element e;
   *(int *)&e = 1;
   Element *void_values = malloc(sizeof(Element) * 3);
-  create_array_int(values1, 3, void_values);
+  create_array_int(values1, 1, void_values);
   List_ptr expected = set_expectation(void_values, 1);
   insert_at(list, e, 0);
   assert_display_msg("insert at 0th position of empty list", list, expected, INT);
@@ -161,5 +153,54 @@ void test_insert_at()
   *(int *)&e = 3;
   insert_at(list, e, 1);
   assert_display_msg("insert in middle position of list", list, expected, INT);
+  clear_list(expected);
+}
+void display_int(List_ptr list)
+{
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    printf("%d\n", *(int *)&p_walk->element);
+    p_walk = p_walk->next;
+  }
+}
+void test_remove_at()
+{
+  List_ptr list = create_list();
+  int values1[] = {};
+  Element e;
+  *(int *)&e = 1;
+  add_to_list(list, e);
+  Element *void_values = malloc(sizeof(Element) * 10);
+  create_array_int(values1, 0, void_values);
+  List_ptr expected = set_expectation(void_values, 0);
+  remove_at(list, 0);
+  assert_display_msg("remove at 0th position of empty list", list, expected, INT);
+  clear_list(expected);
+  int values2[] = {1};
+  create_array_int(values2, 1, void_values);
+  expected = set_expectation(void_values, 1);
+  *(int *)&e = 1;
+  add_to_list(list, e);
+  *(int *)&e = 2;
+  add_to_list(list, e);
+  remove_at(list, 1);
+  clear_list(expected);
+
+  assert_display_msg("remove at last position of list", list, expected, INT);
+  clear_list(expected);
+  int values3[] = {1, 2, 4, 5};
+  create_array_int(values3, 4, void_values);
+  expected = set_expectation(void_values, 4);
+  *(int *)&e = 2;
+  add_to_list(list, e);
+  *(int *)&e = 3;
+  add_to_list(list, e);
+  *(int *)&e = 4;
+  add_to_list(list, e);
+  *(int *)&e = 5;
+  add_to_list(list, e);
+  remove_at(list, 2);
+  assert_display_msg("remove from middle position of list", list, expected, INT);
   clear_list(expected);
 }
