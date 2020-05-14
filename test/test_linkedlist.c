@@ -77,7 +77,3 @@ void test_add_to_list()
   add_to_list(list, e);
   assert_display_msg("adding number at last of existing list with numbers ", list, expected, INT);
 }
-
-void test_add_to_start()
-{
-}

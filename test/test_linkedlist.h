@@ -8,6 +8,6 @@ typedef enum
 } Types;
 void assert_display_msg(char *msg, List_ptr actual, List_ptr expected, Types type);
 void test_add_to_list();
-
+void test_add_to_start();
 Status assert_values(Element num1, Element num2, Types type);
 Status assert_lists(List_ptr actual, List_ptr expected, Types type);

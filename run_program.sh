@@ -17,3 +17,4 @@ done
 
 gcc -o ${file_names[0]} "${file_names[0]}.o" "${file_names[1]}.o";
 ./${file_names[0]};
+rm ${file_names[0]} "${file_names[0]}.o" "${file_names[1]}.o";
