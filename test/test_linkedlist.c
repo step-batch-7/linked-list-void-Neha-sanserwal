@@ -1,5 +1,28 @@
 #include "../linkedlist.c"
 #include "test_linkedlist.h"
+
+List_ptr set_expectation_int(int *values, int length)
+{
+  List_ptr expected = create_list();
+  expected->length = 0;
+  Element e;
+  if (length > 0)
+  {
+    e = &values[0];
+    expected->first = create_node(e);
+    expected->last = expected->first;
+    expected->length = expected->length + 1;
+  }
+  for (int i = 1; i < length; i++)
+  {
+    e = &values[i];
+    Node_ptr node = create_node(e);
+    expected->last->next = node;
+    expected->last = node;
+    ++expected->length;
+  }
+  return expected;
+}
 void assert_display_msg(char *msg, List_ptr actual, List_ptr expected, Types type)
 {
 
@@ -58,6 +81,27 @@ Status assert_lists(List_ptr actual, List_ptr expected, Types type)
 }
 
 void test_add_to_list()
+{
+
+  List_ptr list = create_list();
+  List_ptr expected = create_list();
+  int value = 1;
+  Element e = &value;
+  Node_ptr node = create_node(e);
+  expected->first = node;
+  expected->last = node;
+  expected->length = 1;
+  add_to_list(list, e);
+  assert_display_msg("adding the first node to list", list, expected, INT);
+
+  value = 2;
+  node = create_node(e);
+  expected->length = 2;
+  add_to_list(list, e);
+  assert_display_msg("adding number at last of existing list with numbers ", list, expected, INT);
+}
+
+void test_add_to_start()
 {
 
   List_ptr list = create_list();
