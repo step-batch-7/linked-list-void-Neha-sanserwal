@@ -90,7 +90,7 @@ Status insert_at(List_ptr list, Element element, int position)
 
 Element remove_from_start(List_ptr list)
 {
-  Element removed_element = NULL;
+  Element removed_element;
   if (!list->first)
   {
     return removed_element;
@@ -104,7 +104,7 @@ Element remove_from_start(List_ptr list)
 }
 Element remove_from_end(List_ptr list)
 {
-  Element removed_element = NULL;
+  Element removed_element;
   Node_ptr p_walk = list->first;
   if (!p_walk)
   {
@@ -123,7 +123,7 @@ Element remove_from_end(List_ptr list)
   removed_element = p_walk->next->element;
   free(p_walk->next);
   p_walk->next = NULL;
-  list->length = list->length - 1;
+  --list->length;
   return removed_element;
 }
 
@@ -230,4 +230,21 @@ Status add_unique(List_ptr list, Element value, Matcher matcher)
   }
   add_to_list(list, value);
   return Success;
+}
+
+List_ptr reverse(List_ptr list)
+{
+  Node_ptr temp_prev = NULL;
+  list->last = list->first;
+  Node_ptr temp_next = list->first->next;
+  while (temp_next != NULL)
+  {
+    list->first->next = temp_prev;
+    temp_prev = list->first;
+    list->first = temp_next;
+    temp_next = temp_next->next;
+  }
+  list->first->next = temp_prev;
+
+  return list;
 }
