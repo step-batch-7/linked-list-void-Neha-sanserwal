@@ -26,13 +26,13 @@ int main()
   *(int *)element = 1;
   add_to_list(list, element);
   element = malloc(sizeof(int));
-  *(int *)element = 2;
+  *(int *)element = 3;
   add_to_list(list, element);
   element = malloc(sizeof(int));
   *(int *)element = 3;
   add_to_list(list, element);
-  // list = map(list, add_one);
+  List_ptr a = remove_all_occurrences(list, element, matcher_int);
   forEach(list, multiply_two);
-  display_int(list);
+  display_int(a);
   return 0;
 }

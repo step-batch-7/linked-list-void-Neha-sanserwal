@@ -212,12 +212,12 @@ Element does_exist(Element value, List_ptr list, Matcher matcher)
   {
     if (matcher(p_walk->element, value))
     {
-      *(int *)position = i;
+      position = &i;
       return position;
     }
     p_walk = p_walk->next;
   }
-  *(int *)position = count;
+  position = &count;
   return position;
 }
 
