@@ -161,10 +161,13 @@ void test_remove_at()
   int values1[] = {};
   Element e;
   *(int *)&e = 1;
-  add_to_list(list, e);
   Element *void_values = malloc(sizeof(Element) * 5);
   create_array_int(values1, 0, void_values);
   List_ptr expected = set_expectation(void_values, 0);
+
+  remove_at(list, -1);
+  assert_display_msg("should not remove from invalid position of empty list", list, expected, INT);
+  add_to_list(list, e);
   remove_at(list, 0);
   assert_display_msg("remove at 0th position of empty list", list, expected, INT);
   clear_list(expected);

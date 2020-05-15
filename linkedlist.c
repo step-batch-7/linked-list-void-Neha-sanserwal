@@ -160,7 +160,7 @@ Element remove_from_end(List_ptr list)
 Element remove_at(List_ptr list, int position)
 {
   Node_ptr p_walk = list->first;
-  Element removed_element;
+  Element removed_element = NULL;
   if (position > list->length - 1 || position < 0 || !p_walk)
   {
     return removed_element;
@@ -315,4 +315,9 @@ Element reduce(List_ptr list, Element initial_value, Reducer reducer)
 }
 void forEach(List_ptr list, ElementProcessor processor)
 {
+  Node_ptr p_walk = list->first;
+  while (list->first != NULL)
+  {
+    // processor(p_walk->element)
+  }
 }
