@@ -176,7 +176,7 @@ Element remove_at(List_ptr list, int position)
   p_walk = walk_to(p_walk, 1, position);
   Node_ptr temp = p_walk->next;
   p_walk->next = temp->next;
-  removed_element = temp;
+  removed_element = temp->element;
   free(temp);
   --list->length;
   return removed_element;
@@ -221,9 +221,10 @@ Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 {
 
   Element element_removed = does_exist(value, list, matcher);
+
   if (*(int *)&element_removed == -1)
   {
-    return element_removed;
+    return NULL;
   }
   element_removed = remove_at(list, *(int *)&element_removed);
   return element_removed;
@@ -234,7 +235,7 @@ List_ptr remove_all_occurrences(List_ptr list, Element value, Matcher matcher)
 
   Element element = remove_first_occurrence(list, value, matcher);
   List_ptr new_list = create_list();
-  while (*(int *)&element != -1)
+  while (element != NULL)
   {
     add_to_list(new_list, element);
     element = remove_first_occurrence(list, value, matcher);
@@ -318,6 +319,8 @@ void forEach(List_ptr list, ElementProcessor processor)
   Node_ptr p_walk = list->first;
   while (list->first != NULL)
   {
+    int value = *(int *)&p_walk->element;
+    printf("%d\n", value);
     // processor(p_walk->element)
   }
 }

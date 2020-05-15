@@ -30,11 +30,10 @@ int main()
   *(int *)&element = 3;
   add_to_list(list, element);
   list = map(list, add_one);
-  List_ptr a = filter(list, is_even);
-  *(int *)&element = -1;
-  element = reduce(list, element, greatest_of_two);
-  printf("%d", *(int *)&element);
-  display_int(list);
+  // List_ptr a = filter(list, is_even);
+  // *(int *)&element = -1;
+  List_ptr k = remove_all_occurrences(list, element, matcher_int);
+  display_int(k);
   clear_list(list);
   return 0;
 }
