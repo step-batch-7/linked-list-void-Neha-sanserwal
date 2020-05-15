@@ -116,7 +116,7 @@ Status insert_at(List_ptr list, Element element, int position)
 Element remove_from_start(List_ptr list)
 {
   Element removed_element;
-  if (!list->first)
+  if (list->first == NULL)
   {
     return removed_element;
   }
@@ -124,7 +124,12 @@ Element remove_from_start(List_ptr list)
   list->first = p_walk->next;
   list->length = list->length - 1;
   removed_element = p_walk->element;
+  if (list->first == NULL)
+  {
+    list->last = NULL;
+  }
   free(p_walk);
+
   return removed_element;
 }
 Element remove_from_end(List_ptr list)
