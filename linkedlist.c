@@ -115,7 +115,7 @@ Status insert_at(List_ptr list, Element element, int position)
 
 Element remove_from_start(List_ptr list)
 {
-  Element removed_element;
+  Element removed_element = NULL;
   if (list->first == NULL)
   {
     return removed_element;
@@ -134,7 +134,7 @@ Element remove_from_start(List_ptr list)
 }
 Element remove_from_end(List_ptr list)
 {
-  Element removed_element;
+  Element removed_element = NULL;
   Node_ptr p_walk = list->first;
   if (!p_walk)
   {
@@ -160,7 +160,7 @@ Element remove_from_end(List_ptr list)
 Element remove_at(List_ptr list, int position)
 {
   Node_ptr p_walk = list->first;
-  Element removed_element = NULL;
+  Element removed_element;
   if (position > list->length - 1 || position < 0 || !p_walk)
   {
     return removed_element;
@@ -312,4 +312,7 @@ Element reduce(List_ptr list, Element initial_value, Reducer reducer)
     p_walk = p_walk->next;
   }
   return initial_value;
+}
+void forEach(List_ptr list, ElementProcessor processor)
+{
 }
