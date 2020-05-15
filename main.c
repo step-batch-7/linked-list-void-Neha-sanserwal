@@ -30,7 +30,9 @@ int main()
   *(int *)&element = 3;
   add_to_list(list, element);
   list = map(list, add_one);
-  display_int(list);
+  List_ptr a = filter(list, is_even);
+
+  display_int(a);
   clear_list(list);
   return 0;
 }

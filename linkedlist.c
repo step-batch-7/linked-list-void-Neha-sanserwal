@@ -16,6 +16,10 @@ Element add_one(Element element)
   return element;
 }
 
+Status is_even(Element element)
+{
+  return *(int *)&element % 2 == 0;
+}
 Node_ptr walk_to(Node_ptr p_walk, int from, int position)
 {
   for (int i = from; i < position; i++)
@@ -270,4 +274,20 @@ List_ptr map(List_ptr list, Mapper mapper)
     p_walk = p_walk->next;
   }
   return list;
+}
+
+List_ptr filter(List_ptr list, Predicate Predicate)
+{
+  Node_ptr p_walk = list->first;
+  List_ptr filtered_list = create_list();
+  while (p_walk != NULL)
+  {
+    if (Predicate(p_walk->element))
+    {
+      add_to_list(filtered_list, p_walk->element);
+    }
+    p_walk = p_walk->next;
+  }
+
+  return filtered_list;
 }
