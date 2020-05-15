@@ -20,6 +20,12 @@ Status is_even(Element element)
 {
   return *(int *)&element % 2 == 0;
 }
+
+Element greatest_of_two(Element elementA, Element elementB)
+{
+  return *(int *)&elementA > *(int *)&elementB ? elementA : elementB;
+}
+
 Node_ptr walk_to(Node_ptr p_walk, int from, int position)
 {
   for (int i = from; i < position; i++)
@@ -290,4 +296,15 @@ List_ptr filter(List_ptr list, Predicate Predicate)
   }
 
   return filtered_list;
+}
+
+Element reduce(List_ptr list, Element initial_value, Reducer reducer)
+{
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    initial_value = reducer(p_walk->element, initial_value);
+    p_walk = p_walk->next;
+  }
+  return initial_value;
 }

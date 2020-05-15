@@ -31,8 +31,10 @@ int main()
   add_to_list(list, element);
   list = map(list, add_one);
   List_ptr a = filter(list, is_even);
-
-  display_int(a);
+  *(int *)&element = -1;
+  element = reduce(list, element, greatest_of_two);
+  printf("%d", *(int *)&element);
+  display_int(list);
   clear_list(list);
   return 0;
 }
