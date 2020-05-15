@@ -220,3 +220,14 @@ List_ptr remove_all_occurrences(List_ptr list, Element value, Matcher matcher)
   }
   return new_list;
 }
+
+Status add_unique(List_ptr list, Element value, Matcher matcher)
+{
+  Element position = does_exist(value, list, matcher);
+  if (*(int *)&position != -1)
+  {
+    return Failure;
+  }
+  add_to_list(list, value);
+  return Success;
+}
