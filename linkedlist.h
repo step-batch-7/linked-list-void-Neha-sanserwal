@@ -49,7 +49,6 @@ List_ptr assign_first_and_last(List_ptr list, Node_ptr ptr);
 Status add_to_list(List_ptr, Element);
 Status add_to_start(List_ptr, Element);
 Status insert_at(List_ptr, Element element, int position);
-
 List_ptr reverse(List_ptr);
 
 List_ptr map(List_ptr, Mapper);
@@ -62,6 +61,8 @@ Element remove_from_end(List_ptr);
 Element remove_at(List_ptr, int position);
 
 Status matcher_int(Element elementA, Element elementB);
+Status matcher_float(Element elementA, Element elementB);
+
 Element remove_first_occurrence(List_ptr, Element element, Matcher matcher);
 List_ptr remove_all_occurrences(List_ptr, Element element, Matcher matcher); // Returns List of removed elements
 Status matcher_float(Element elementA, Element elementB);
@@ -70,4 +71,6 @@ Element does_exist(Element value, List_ptr list, Matcher matcher);
 Status add_unique(List_ptr list, Element element, Matcher matcher);
 
 Status clear_list(List_ptr);
+
+Element add_one(Element element);
 #endif

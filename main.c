@@ -23,8 +23,13 @@ int main()
 {
   Element element;
   List_ptr list = create_list();
-
-  list = reverse(list);
+  *(int *)&element = 1;
+  add_to_list(list, element);
+  *(int *)&element = 2;
+  add_to_list(list, element);
+  *(int *)&element = 3;
+  add_to_list(list, element);
+  list = map(list, add_one);
   display_int(list);
   clear_list(list);
   return 0;

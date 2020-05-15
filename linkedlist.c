@@ -1,5 +1,20 @@
 #include "linkedlist.h"
 #include <stdlib.h>
+Status matcher_int(Element elementA, Element elementB)
+{
+  return *(int *)&elementA == *(int *)&elementB;
+}
+
+Status matcher_float(Element elementA, Element elementB)
+{
+  return *(float *)&elementA == *(float *)&elementB;
+}
+
+Element add_one(Element element)
+{
+  ++*(int *)&element;
+  return element;
+}
 
 Node_ptr walk_to(Node_ptr p_walk, int from, int position)
 {
@@ -169,16 +184,6 @@ Status clear_list(List_ptr list)
   return Failure;
 }
 
-Status matcher_int(Element elementA, Element elementB)
-{
-  return *(int *)&elementA == *(int *)&elementB;
-}
-
-Status matcher_float(Element elementA, Element elementB)
-{
-  return *(float *)&elementA == *(float *)&elementB;
-}
-
 Element does_exist(Element value, List_ptr list, Matcher matcher)
 {
   Element position;
@@ -196,6 +201,7 @@ Element does_exist(Element value, List_ptr list, Matcher matcher)
   *(int *)&position = count;
   return position;
 }
+
 Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 {
 
@@ -252,5 +258,16 @@ List_ptr reverse(List_ptr list)
   }
 
   list->first->next = temp_prev;
+  return list;
+}
+
+List_ptr map(List_ptr list, Mapper mapper)
+{
+  Node_ptr p_walk = list->first;
+  while (p_walk != NULL)
+  {
+    p_walk->element = mapper(p_walk->element);
+    p_walk = p_walk->next;
+  }
   return list;
 }
