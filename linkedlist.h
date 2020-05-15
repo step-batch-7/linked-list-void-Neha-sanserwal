@@ -74,5 +74,5 @@ Status clear_list(List_ptr);
 Element add_one(Element element);
 Status is_even(Element element);
 Element greatest_of_two(Element elementA, Element elementB);
-
+void multiply_two(Element element);
 #endif

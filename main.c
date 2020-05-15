@@ -30,10 +30,8 @@ int main()
   *(int *)&element = 3;
   add_to_list(list, element);
   list = map(list, add_one);
-  // List_ptr a = filter(list, is_even);
-  // *(int *)&element = -1;
-  List_ptr k = remove_all_occurrences(list, element, matcher_int);
-  display_int(k);
+  forEach(list, multiply_two);
+  display_int(list);
   clear_list(list);
   return 0;
 }

@@ -15,6 +15,10 @@ Element add_one(Element element)
   ++*(int *)&element;
   return element;
 }
+void multiply_two(Element element)
+{
+  *(int *)&element = *(int *)&element * 2;
+}
 
 Status is_even(Element element)
 {
@@ -317,10 +321,10 @@ Element reduce(List_ptr list, Element initial_value, Reducer reducer)
 void forEach(List_ptr list, ElementProcessor processor)
 {
   Node_ptr p_walk = list->first;
-  while (list->first != NULL)
+  while (p_walk != NULL)
   {
-    int value = *(int *)&p_walk->element;
-    printf("%d\n", value);
-    // processor(p_walk->element)
+    processor(&p_walk->element);
+
+    p_walk = p_walk->next;
   }
 }
