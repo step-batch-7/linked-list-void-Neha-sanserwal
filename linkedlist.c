@@ -2,7 +2,7 @@
 #include <stdlib.h>
 Status matcher_int(Element elementA, Element elementB)
 {
-  return *(int *)&elementA == *(int *)&elementB;
+  return *(int *)elementA == *(int *)elementB;
 }
 
 Status matcher_float(Element elementA, Element elementB)
@@ -12,22 +12,22 @@ Status matcher_float(Element elementA, Element elementB)
 
 Element add_one(Element element)
 {
-  ++*(int *)&element;
+  ++*(int *)element;
   return element;
 }
 void multiply_two(Element element)
 {
-  *(int *)&element = *(int *)&element * 2;
+  *(int *)element = *(int *)element * 2;
 }
 
 Status is_even(Element element)
 {
-  return *(int *)&element % 2 == 0;
+  return *(int *)element % 2 == 0;
 }
 
 Element greatest_of_two(Element elementA, Element elementB)
 {
-  return *(int *)&elementA > *(int *)&elementB ? elementA : elementB;
+  return *(int *)elementA > *(int *)elementB ? elementA : elementB;
 }
 
 Node_ptr walk_to(Node_ptr p_walk, int from, int position)
@@ -212,12 +212,12 @@ Element does_exist(Element value, List_ptr list, Matcher matcher)
   {
     if (matcher(p_walk->element, value))
     {
-      *(int *)&position = i;
+      *(int *)position = i;
       return position;
     }
     p_walk = p_walk->next;
   }
-  *(int *)&position = count;
+  *(int *)position = count;
   return position;
 }
 
@@ -226,11 +226,11 @@ Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 
   Element element_removed = does_exist(value, list, matcher);
 
-  if (*(int *)&element_removed == -1)
+  if (*(int *)element_removed == -1)
   {
     return NULL;
   }
-  element_removed = remove_at(list, *(int *)&element_removed);
+  element_removed = remove_at(list, *(int *)element_removed);
   return element_removed;
 }
 
@@ -250,7 +250,7 @@ List_ptr remove_all_occurrences(List_ptr list, Element value, Matcher matcher)
 Status add_unique(List_ptr list, Element value, Matcher matcher)
 {
   Element position = does_exist(value, list, matcher);
-  if (*(int *)&position != -1)
+  if (*(int *)position != -1)
   {
     return Failure;
   }
@@ -323,8 +323,7 @@ void forEach(List_ptr list, ElementProcessor processor)
   Node_ptr p_walk = list->first;
   while (p_walk != NULL)
   {
-    processor(&p_walk->element);
-
+    processor(p_walk->element);
     p_walk = p_walk->next;
   }
 }
