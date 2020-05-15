@@ -64,6 +64,7 @@ Element remove_at(List_ptr, int position);
 Status matcher_int(Element elementA, Element elementB);
 Element remove_first_occurrence(List_ptr, Element element, Matcher matcher);
 List_ptr remove_all_occurrences(List_ptr, Element element, Matcher matcher); // Returns List of removed elements
+Status matcher_float(Element elementA, Element elementB);
 Element does_exist(Element value, List_ptr list, Matcher matcher);
 Status add_unique(List_ptr list, Element element, Matcher matcher);
 

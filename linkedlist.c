@@ -174,6 +174,11 @@ Status matcher_int(Element elementA, Element elementB)
   return *(int *)&elementA == *(int *)&elementB;
 }
 
+Status matcher_float(Element elementA, Element elementB)
+{
+  return *(float *)&elementA == *(float *)&elementB;
+}
+
 Element does_exist(Element value, List_ptr list, Matcher matcher)
 {
   Element position;
@@ -183,22 +188,35 @@ Element does_exist(Element value, List_ptr list, Matcher matcher)
   {
     if (matcher(p_walk->element, value))
     {
-      position = &i;
+      *(int *)&position = i;
       return position;
     }
     p_walk = p_walk->next;
   }
-  position = &count;
+  *(int *)&position = count;
   return position;
 }
 Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 {
 
-  Element position = does_exist(value, list, matcher);
-  if (*(int *)&position == -1)
+  Element element_removed = does_exist(value, list, matcher);
+  if (*(int *)&element_removed == -1)
   {
-
-    return position;
+    return element_removed;
   }
-  return remove_at(list, *(int *)&position);
+  element_removed = remove_at(list, *(int *)&element_removed);
+  return element_removed;
+}
+
+List_ptr remove_all_occurrences(List_ptr list, Element value, Matcher matcher)
+{
+
+  Element element = remove_first_occurrence(list, value, matcher);
+  List_ptr new_list = create_list();
+  while (*(int *)&element != -1)
+  {
+    add_to_list(new_list, element);
+    element = remove_first_occurrence(list, value, matcher);
+  }
+  return new_list;
 }
