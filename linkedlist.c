@@ -234,9 +234,15 @@ Status add_unique(List_ptr list, Element value, Matcher matcher)
 
 List_ptr reverse(List_ptr list)
 {
+  if (!list->first)
+  {
+    return list;
+  }
+
   Node_ptr temp_prev = NULL;
   list->last = list->first;
   Node_ptr temp_next = list->first->next;
+
   while (temp_next != NULL)
   {
     list->first->next = temp_prev;
@@ -244,7 +250,7 @@ List_ptr reverse(List_ptr list)
     list->first = temp_next;
     temp_next = temp_next->next;
   }
-  list->first->next = temp_prev;
 
+  list->first->next = temp_prev;
   return list;
 }
