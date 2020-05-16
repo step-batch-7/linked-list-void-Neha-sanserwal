@@ -15,5 +15,7 @@ int main()
   test_remove_from_end();
   printf("remove_from_start : \n");
   test_remove_from_start();
+  printf("remove_first_occurrence : \n");
+  test_remove_first_occurrence();
   return 0;
 }
