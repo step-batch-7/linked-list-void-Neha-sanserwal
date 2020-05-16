@@ -368,3 +368,27 @@ void test_remove_all_occurrences()
   n_list = remove_all_occurrences(list, element_ptr, matcher_int);
   assert_display_msg("should remove multiple elements if matches", n_list, expected, INT);
 }
+
+void test_add_unique()
+{
+  List_ptr list = create_list();
+  int values1[] = {1};
+  Element *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values1, 1, void_values);
+  List_ptr expected = set_expectation(void_values, 1);
+  int element = 1;
+  Element e = &element;
+  add_to_list(list, e);
+  int element_to_add = 1;
+  Element element_ptr = &element_to_add;
+  add_unique(list, element_ptr, matcher_int);
+  assert_display_msg("should not add element in the list if element already exist", list, expected, INT);
+  int values2[] = {1, 2};
+  *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values2, 2, void_values);
+  expected = set_expectation(void_values, 2);
+  element_to_add = 2;
+  add_unique(list, element_ptr, matcher_int);
+  assert_display_msg("remove the  single element list if matches", list, expected, INT);
+  clear_list(expected);
+}

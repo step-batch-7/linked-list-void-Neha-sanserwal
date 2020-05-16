@@ -17,7 +17,7 @@ int main()
   test_remove_from_start();
   printf("remove_first_occurrence : \n");
   test_remove_first_occurrence();
-  printf("remove_all_occurrences : \n");
-  test_remove_all_occurrences();
+  printf("add_unique : \n");
+  test_add_unique();
   return 0;
 }
