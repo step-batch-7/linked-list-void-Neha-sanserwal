@@ -7,7 +7,7 @@ Status matcher_int(Element elementA, Element elementB)
 
 Status matcher_float(Element elementA, Element elementB)
 {
-  return *(float *)&elementA == *(float *)&elementB;
+  return *(float *)elementA == *(float *)elementB;
 }
 
 Element add_one(Element element)
@@ -205,19 +205,18 @@ Status clear_list(List_ptr list)
 
 Element does_exist(Element value, List_ptr list, Matcher matcher)
 {
-  Element position;
-  int count = -1;
+  Element position = malloc(sizeof(int));
+  *(int *)position = -1;
   Node_ptr p_walk = list->first;
   for (int i = 0; i < list->length; i++)
   {
     if (matcher(p_walk->element, value))
     {
-      position = &i;
+      *(int *)position = i;
       return position;
     }
     p_walk = p_walk->next;
   }
-  position = &count;
   return position;
 }
 
@@ -225,7 +224,6 @@ Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 {
 
   Element element_removed = does_exist(value, list, matcher);
-
   if (*(int *)element_removed == -1)
   {
     return NULL;
@@ -236,7 +234,6 @@ Element remove_first_occurrence(List_ptr list, Element value, Matcher matcher)
 
 List_ptr remove_all_occurrences(List_ptr list, Element value, Matcher matcher)
 {
-
   Element element = remove_first_occurrence(list, value, matcher);
   List_ptr new_list = create_list();
   while (element != NULL)

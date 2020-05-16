@@ -324,3 +324,47 @@ void test_remove_first_occurrence()
   assert_display_msg("should not execute operation of removing from Empty list", list, expected, INT);
   clear_list(expected);
 }
+
+void test_remove_all_occurrences()
+{
+  List_ptr list = create_list();
+  int values1[] = {};
+  Element *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values1, 0, void_values);
+  List_ptr expected = set_expectation(void_values, 0);
+  int element = 1;
+  Element e = &element;
+  add_to_list(list, e);
+  int element_to_remove = 2;
+  Element element_ptr = &element_to_remove;
+  List_ptr n_list = remove_all_occurrences(list, element_ptr, matcher_int);
+  assert_display_msg("should not remove the single element list if doesn't match matches", n_list, expected, INT);
+  int values2[] = {1};
+  *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values2, 1, void_values);
+  expected = set_expectation(void_values, 1);
+  element_to_remove = 1;
+  n_list = remove_all_occurrences(list, element_ptr, matcher_int);
+  assert_display_msg("remove the  single element list if matches", n_list, expected, INT);
+  n_list = remove_all_occurrences(list, element_ptr, matcher_int);
+  clear_list(expected);
+  int values3[] = {2, 2, 2};
+  *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values3, 3, void_values);
+  expected = set_expectation(void_values, 3);
+  int element2 = 2;
+  e = &element2;
+  add_to_list(list, e);
+  int element3 = 2;
+  e = &element3;
+  add_to_list(list, e);
+  int element4 = 4;
+  e = &element4;
+  add_to_list(list, e);
+  int element5 = 2;
+  e = &element5;
+  add_to_list(list, e);
+  element_to_remove = 2;
+  n_list = remove_all_occurrences(list, element_ptr, matcher_int);
+  assert_display_msg("should remove multiple elements if matches", n_list, expected, INT);
+}
