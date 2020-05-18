@@ -449,3 +449,39 @@ void test_map()
   list = map(list, add_one);
   assert_display_msg("should add one to each element of the list containing more than one element", list, expected, INT);
 }
+
+void test_filter()
+{
+  List_ptr list = create_list();
+  int values1[] = {};
+  Element *void_values = malloc(sizeof(Element) * 0);
+  create_array_int(values1, 0, void_values);
+  List_ptr expected = set_expectation(void_values, 0);
+  List_ptr n_list = filter(list,is_even);
+  assert_display_msg("should predicate for the list containing no element", n_list, expected, INT);
+  int element = 1;
+  Element e = &element;
+  add_to_list(list, e);
+  n_list = filter(list,is_even);
+  assert_display_msg("should filter the even number from  the list containing one element", n_list, expected, INT);
+  clear_list(expected);
+  clear_list(list);
+  int values2[] = {2,4};
+  *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values2, 2, void_values);
+  expected = set_expectation(void_values, 2);
+  int element1 = 1;
+  e = &element1;
+  add_to_list(list, e);
+  int element2 = 2;
+  e = &element2;
+  add_to_list(list, e);
+  int element3 = 3;
+  e = &element3;
+  add_to_list(list, e);
+  int element4 = 4;
+  e = &element4;
+  add_to_list(list, e);
+  n_list = filter(list, is_even);
+  assert_display_msg("should filter the even number from the list containing more than one element", n_list, expected, INT);
+}

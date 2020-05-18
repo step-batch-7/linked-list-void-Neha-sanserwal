@@ -23,5 +23,7 @@ int main()
   test_reverse();
   printf("map : \n");
   test_map();
+  printf("filter : \n");
+  test_filter();
   return 0;
 }
