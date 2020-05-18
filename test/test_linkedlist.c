@@ -392,3 +392,27 @@ void test_add_unique()
   assert_display_msg("remove the  single element list if matches", list, expected, INT);
   clear_list(expected);
 }
+
+void test_reverse()
+{
+  List_ptr list = create_list();
+  int values1[] = {};
+  Element *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values1, 0, void_values);
+  List_ptr expected = set_expectation(void_values, 0);
+  int element = 1;
+  Element e = &element;
+  reverse(list);
+  assert_display_msg("should reverse empty list", list, expected, INT);
+  add_to_list(list, e);
+  int values2[] = {2, 1};
+  *void_values = malloc(sizeof(Element) * 2);
+  create_array_int(values2, 2, void_values);
+  expected = set_expectation(void_values, 2);
+  int element2 = 2;
+  e = &element2;
+  add_to_list(list,e);
+  reverse(list);
+  assert_display_msg("should reverse list of more than one element", list, expected, INT);
+  clear_list(expected);
+}
