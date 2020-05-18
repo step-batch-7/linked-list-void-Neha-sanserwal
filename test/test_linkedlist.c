@@ -64,7 +64,6 @@ Status assert_lists(List_ptr actual, List_ptr expected, Types type)
 {
   if (!(actual->length == expected->length))
   {
-    printf("%d%d", actual->length, expected->length);
     return Failure;
   }
   if (actual->length == expected->length && expected->length == 0)
@@ -411,8 +410,42 @@ void test_reverse()
   expected = set_expectation(void_values, 2);
   int element2 = 2;
   e = &element2;
-  add_to_list(list,e);
+  add_to_list(list, e);
   reverse(list);
   assert_display_msg("should reverse list of more than one element", list, expected, INT);
   clear_list(expected);
+}
+
+void test_map()
+{
+  List_ptr list = create_list();
+  int values1[] = {1};
+  Element *void_values = malloc(sizeof(Element) * 1);
+  create_array_int(values1, 1, void_values);
+  List_ptr expected = set_expectation(void_values, 1);
+  int element = 0;
+  Element e = &element;
+  add_to_list(list, e);
+  list = map(list, add_one);
+  assert_display_msg("should add one to the list containing one element", list, expected, INT);
+  clear_list(expected);
+   clear_list(list);
+  int values2[] = {1,2,3,4};
+  *void_values = malloc(sizeof(Element) * 4);
+  create_array_int(values2, 4, void_values);
+  expected = set_expectation(void_values, 4);
+  int element1 = 0;
+  e = &element1;
+  add_to_list(list, e);
+  int element2 = 1;
+  e = &element2;
+  add_to_list(list, e);
+  int element3 = 2;
+  e = &element3;
+  add_to_list(list, e);
+  int element4 = 3;
+  e = &element4;
+  add_to_list(list, e);
+  list = map(list, add_one);
+  assert_display_msg("should add one to each element of the list containing more than one element", list, expected, INT);
 }

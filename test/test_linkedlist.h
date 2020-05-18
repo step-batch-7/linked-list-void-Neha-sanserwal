@@ -16,5 +16,7 @@ void test_remove_from_start();
 void test_remove_first_occurrence();
 void test_remove_all_occurrences();
 void test_add_unique();
+void test_map();
+void test_reverse();
 Status assert_values(Element num1, Element num2, Types type);
 Status assert_lists(List_ptr actual, List_ptr expected, Types type);

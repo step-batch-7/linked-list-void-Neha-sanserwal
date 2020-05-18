@@ -315,6 +315,7 @@ Element reduce(List_ptr list, Element initial_value, Reducer reducer)
   }
   return initial_value;
 }
+
 void forEach(List_ptr list, ElementProcessor processor)
 {
   Node_ptr p_walk = list->first;

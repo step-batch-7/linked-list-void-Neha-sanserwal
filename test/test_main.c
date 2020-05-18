@@ -19,5 +19,9 @@ int main()
   test_remove_first_occurrence();
   printf("add_unique : \n");
   test_add_unique();
+  printf("reverse : \n");
+  test_reverse();
+  printf("map : \n");
+  test_map();
   return 0;
 }
